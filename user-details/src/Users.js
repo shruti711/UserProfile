@@ -11,15 +11,15 @@ const UserInfo = () => {
       const response = await fetch(apiUrl);
       const Json = await response.json();
     //   Destruct  firstName and lastName from name
-      const { firstName, lastName } = Json.results[0].name;
+      const { first, last }= Json.results[0].name;
       const email = Json.results[0].email;
     //   set user data into setUserData
-      setUserData({ name: `${firstName} ${lastName}`, email });
+      setUserData({ name: `${first} ${last}`, email });
 
     //   store data into localStorage
       localStorage.setItem(
         "userData",
-        JSON.stringify({ name: `${firstName} ${lastName}`, email })
+        JSON.stringify({ name: `${first} ${last}`, email })
       );
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -45,8 +45,8 @@ const UserInfo = () => {
     <Fragment>
      {userData ? 
      <div>
-        <h2>{userData.name}</h2> 
-        <p>{userData.email}</p>
+        <h2>Name: {userData.name}</h2> 
+        <p>Email: {userData.email}</p>
         <button onClick={handleRefresh}> Refresh </button>
     </div> : <p>No Data Found</p>}
     </Fragment>
